@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Kampung Ambarukmo - Kafe Tradisional Jogja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6F4E37',
+                        secondary: '#D4B996',
+                        accent: '#8B5A2B',
+                        light: '#F5F5DC',
+                        dark: '#3E2723',
+                        nature: '#556B2F'
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Poppins', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .hero-pattern {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+        }
+        
+        .batik-overlay {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZD0iTTAgMEgxMDBWMTAwSDBWMFoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjAgMjBDMjAgMzEuMDQ1NyAzMS4wNDU3IDQwIDQwIDQwQzQ4Ljk1NDMgNDAgNjAgMzEuMDQ1NyA2MCAyMEM2MCA4Ljk1NDMgNDguOTU0MyAwIDQwIDBDMzEuMDQ1NyAwIDIwIDguOTU0MyAyMCAyMFoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=');
+            background-size: 150px;
+            opacity: 0.1;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            z-index: 10;
+        }
+        
+        .scroll-down {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-15px);}
+            60% {transform: translateY(-7px);}
+        }
+        
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #D4B996;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive image and section fixes */
+        .hero-section {
+            min-height: 100vh;
+        }
+
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 80vh;
+            }
+            .menu-card .h-48 {
+                height: 24rem;
+            }
+            .gallery-item img {
+                height: 20rem;
+            }
+            #location iframe {
+                width: 100%;
+                height: 300px;
+            }
+            .space-y-4 span{
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .menu-card .h-48 {
+                height: 28rem;
+            }
+            .gallery-item img {
+                height: 22rem;
+            }
+            #location iframe {
+                width: 100%;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="font-body bg-light text-dark">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-heading text-2xl text-primary">Kopi Kampung Ambarukmo</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Beranda</a>
+                        <a href="#menu" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Menu</a>
+                        <a href="#about" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Tentang Kami</a>
+                        <a href="#gallery" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Galeri</a>
+                        <a href="#location" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Lokasi</a>
+                        <a href="#contact" class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-accent transition duration-300">Reservasi</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-primary focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:bg-opacity-10 rounded-md">Beranda</a>
+                <a href="#menu" class="block px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:bg-opacity-10 rounded-md">Menu</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:bg-opacity-10 rounded-md">Tentang Kami</a>
+                <a href="#gallery" class="block px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:bg-opacity-10 rounded-md">Galeri</a>
+                <a href="#location" class="block px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:bg-opacity-10 rounded-md">Lokasi</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-white bg-primary rounded-md">Reservasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative hero-pattern hero-section flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/30 to-dark/50 batik-overlay"></div>
+        <div class="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center animate-fade-in">
+            <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-black mb-6 animate-slide-up">
+                <span class="block">Kopi Kampung</span>
+                <span class="block text-secondary">Ambarukmo</span>
+            </h1>
+            <p class="text-xl text-black max-w-2xl mx-auto mb-8 animate-slide-up" style="animation-delay: 0.2s">
+                Menikmati kehangatan tradisi Jawa dalam setiap tegukan kopi
+            </p>
+            <div class="animate-slide-up" style="animation-delay: 0.4s">
+                <a href="#menu" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-dark bg-secondary hover:bg-accent hover:text-black transition duration-300">
+                    Jelajahi Menu Kami
+                </a>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-down">
+                <a href="#about" class="text-black">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <div class="relative">
+                        <div class="w-full h-96 bg-cover bg-center rounded-lg shadow-xl" style="background-image: url('https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80');"></div>
+                        <div class="absolute -bottom-6 -right-6 bg-primary p-4 rounded-lg shadow-lg hidden md:block">
+                            <div class="text-white text-center p-2">
+                                <p class="font-heading text-2xl">Sejak 2010</p>
+                                <p class="text-sm">Melayani dengan hati</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="font-heading text-3xl md:text-4xl text-primary mb-6">Cerita Kami</h2>
+                    <p class="text-lg mb-6">
+                        Kopi Kampung Ambarukmo lahir dari kecintaan terhadap warisan budaya Jawa dan kekayaan rasa kopi lokal. Didirikan pada tahun 2010, kami berkomitmen untuk menghadirkan pengalaman ngopi ala Jogja yang autentik namun tetap relevan dengan zaman.
+                    </p>
+                    <p class="text-lg mb-8">
+                        Setiap cangkir kopi kami diseduh dengan teknik tradisional yang telah disempurnakan, menggunakan biji kopi pilihan dari petani lokal di lereng Gunung Merapi dan Merbabu. Kami menggabungkan kebijaksanaan leluhur dengan inovasi modern untuk menciptakan harmoni rasa yang unik.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="bg-primary rounded-full p-2 mr-3">
+                                <i class="fas fa-coffee text-white"></i>
+                            </div>
+                            <span class="font-medium">Kopi Lokal Pilihan</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-primary rounded-full p-2 mr-3">
+                                <i class="fas fa-leaf text-white"></i>
+                            </div>
+                            <span class="font-medium">Ramah Lingkungan</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-primary rounded-full p-2 mr-3">
+                                <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <span class="font-medium">Resep Turun Temurun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl text-primary mb-4">Menu Kami</h2>
+                <p class="max-w-2xl mx-auto text-lg">Nikmati berbagai pilihan minuman dan makanan yang dibuat dengan bahan terbaik dan penuh cita rasa khas Jogja</p>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="font-heading text-2xl text-primary mb-8 text-center">Minuman Signature</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Menu Item 1 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md menu-card transition duration-300">
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-heading text-xl text-primary">Kopi Joss Ambarukmo</h4>
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Rp 25.000</span>
+                            </div>
+                            <p class="text-gray-600">Kopi hitam khas Jogja dengan arang aktif, memberikan sensasi unik dan manfaat kesehatan.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Item 2 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md menu-card transition duration-300">
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-heading text-xl text-primary">Wedang Uwuh Spesial</h4>
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Rp 20.000</span>
+                            </div>
+                            <p class="text-gray-600">Minuman herbal tradisional dengan rempah-rempah pilihan, hangat dan menyehatkan.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Item 3 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md menu-card transition duration-300">
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('/images/teh-tarik-gula-aren-foto-resep-utama.webp');"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-heading text-xl text-primary">Es Teh Tarik Gula Aren</h4>
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Rp 18.000</span>
+                            </div>
+                            <p class="text-gray-600">Teh tarik dengan gula aren asli, menyegarkan dengan sentuhan manis alami.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="font-heading text-2xl text-primary mb-8 text-center">Makanan Pendamping</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Menu Item 4 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md menu-card transition duration-300">
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('/images/lemper\ ayam.webp');"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-heading text-xl text-primary">Lemper Ayam</h4>
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Rp 15.000</span>
+                            </div>
+                            <p class="text-gray-600">Ketupat berisi ayam suwir dengan bumbu rempah, dibungkus daun pisang.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Item 5 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md menu-card transition duration-300">
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('/images/Resep_Lapis_Legit.webp');"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-heading text-xl text-primary">Kue Lapis Legit</h4>
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Rp 12.000</span>
+                            </div>
+                            <p class="text-gray-600">Kue tradisional berlapis dengan rasa manis dan tekstur yang lembut.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Item 6 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md menu-card transition duration-300">
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('/images/gudeg.webp');"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-heading text-xl text-primary">Gudeg Manggar</h4>
+                                <span class="bg-primary text-white text-sm px-3 py-1 rounded-full">Rp 22.000</span>
+                            </div>
+                            <p class="text-gray-600">Gudeg khas Jogja dari manggar (bunga kelapa) dengan kuah gula merah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl text-primary mb-4">Galeri Kami</h2>
+                <p class="max-w-2xl mx-auto text-lg">Suasana hangat dan nyaman yang membuat Anda betah berlama-lama</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fEVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Interior Kafe" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-light">
+                        <p class="text-primary font-medium">Area Dalam Kafe</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="/images/teras kafe kafe.webp" alt="Teras Kafe" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-light">
+                        <p class="text-primary font-medium">Teras dengan Pemandangan</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fEVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Proses Pembuatan Kopi" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-light">
+                        <p class="text-primary font-medium">Proses Penyeduhan Kopi</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fEVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Minuman Tradisional" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-light">
+                        <p class="text-primary font-medium">Minuman Tradisional</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="/images/gudeg.webp" alt="Makanan Khas" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-light">
+                        <p class="text-primary font-medium">Makanan Khas Jogja</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fEVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Acara di Kafe" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-light">
+                        <p class="text-primary font-medium">Acara Budaya Mingguan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Hours Section -->
+    <section id="location" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+                <div class="mb-12 lg:mb-0">
+                    <h2 class="font-heading text-3xl md:text-4xl text-primary mb-6">Lokasi & Jam Buka</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-primary rounded-full p-2 mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading text-xl text-primary mb-1">Alamat</h3>
+                                <p>Jl. Ambarukmo No. 10, Yogyakarta</p>
+                                <p class="text-sm text-gray-500">Sebelah timur Plaza Ambarukmo</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <div class="bg-primary rounded-full p-2 mr-4">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading text-xl text-primary mb-1">Jam Operasional</h3>
+                                <p>Senin - Jumat: 09.00 - 01.30 WIB</p>
+                                <p>Sabtu - Minggu: 09.30 - 01.30 WIB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-primary rounded-full p-2 mr-4">
+                                <i class="fas fa-phone-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading text-xl text-primary mb-1">Kontak</h3>
+                                <p>+62 812 1581 9525</p>
+                                <p class="text-sm text-gray-500">Reservasi untuk grup >10 orang</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-primary text-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-heading text-xl mb-4">Acara Khusus</h3>
+                        <p class="mb-4">Setiap Sabtu malam kami mengadakan pertunjukan musik akustik dan pembacaan puisi mulai pukul 19.30 WIB.</p>
+                        <p>Setiap Minggu pagi ada workshop pembuatan kopi tradisional mulai pukul 09.00 WIB.</p>
+                    </div>
+                </div>
+                
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.021780047403!2d110.40113507500494!3d-7.787515192232317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a598b15c29f8d%3A0xac0483645afbf22!2sKopi%20Kampung%20Ambarukmo%20(Kokambar)!5e0!3m2!1sid!2sid!4v1746407022988!5m2!1sid!2sid" 
+                    width="600" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl text-primary mb-4">Hubungi Kami</h2>
+                <p class="max-w-2xl mx-auto text-lg">Pesan meja, tanya tentang menu, atau berikan masukan untuk kami</p>
+            </div>
+            
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+                <div class="mb-12 lg:mb-0">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-primary mb-1">Nama Lengkap</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="Nama Anda">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-primary mb-1">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="email@contoh.com">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-primary mb-1">Nomor Telepon</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="0812-3456-7890">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-primary mb-1">Pesan</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="Tulis pesan Anda di sini..."></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-primary text-white py-3 px-6 rounded-md hover:bg-accent transition duration-300 font-medium">
+                                Kirim Pesan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-light p-8 rounded-lg h-full">
+                        <h3 class="font-heading text-2xl text-primary mb-6">Media Sosial</h3>
+                        <p class="mb-8">Ikuti kami di media sosial untuk mendapatkan informasi terbaru tentang promo, acara, dan konten menarik seputar kopi dan budaya Jawa.</p>
+                        
+                        <div class="space-y-4">
+                            <a href="https://www.facebook.com/pages/Kokambar%20Coffee/303824913837052/" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="bg-blue-600 text-white p-2 rounded-full mr-4">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <span>Kopi Kampung Ambarukmo</span>
+                            </a>
+                            <a href="https://www.instagram.com/kopi_kampungambarukmo/" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="bg-pink-600 text-white p-2 rounded-full mr-4">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <span>@kopi_kampungambarukmo</span>
+                            </a>
+                            <a href="https://www.youtube.com/results?search_query=kopi+ambarukmo" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="bg-red-600 text-white p-2 rounded-full mr-4">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <span>Kopi Kampung Channel</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="font-heading text-xl text-secondary mb-4">Kopi Kampung Ambarukmo</h3>
+                    <p class="mb-4">Menghadirkan kehangatan tradisi Jawa dalam setiap cangkir kopi sejak 2010.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/pages/Kokambar%20Coffee/303824913837052/" class="text-secondary hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/kopi_kampungambarukmo/" class="text-secondary hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="tel:+6281215819525" class="text-secondary hover:text-white"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/results?search_query=kopi+ambarukmo" class="text-secondary hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-heading text-xl text-secondary mb-4">Tautan Cepat</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-secondary transition duration-300">Beranda</a></li>
+                        <li><a href="#menu" class="hover:text-secondary transition duration-300">Menu</a></li>
+                        <li><a href="#about" class="hover:text-secondary transition duration-300">Tentang Kami</a></li>
+                        <li><a href="#gallery" class="hover:text-secondary transition duration-300">Galeri</a></li>
+                        <li><a href="#location" class="hover:text-secondary transition duration-300">Lokasi</a></li>
+                        <li><a href="#contact" class="hover:text-secondary transition duration-300">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-heading text-xl text-secondary mb-4">Hubungi Kami</h3>
+                    <p>Jl. Ambarukmo No. 10, Yogyakarta</p>
+                    <p class="text-sm text-gray-400">Sebelah timur Plaza Ambarukmo</p>
+                    <p class="mt-2">+62 812 1581 9525</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6 text-center text-sm">
+                <p>© 2023 Kopi Kampung Ambarukmo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
