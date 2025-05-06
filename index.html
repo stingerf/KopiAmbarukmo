@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kopi Kampung Ambarukmo - Kafe Tradisional Jogja</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="images/logo.webp" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -137,7 +138,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <span class="font-heading text-2xl text-primary">Kopi Kampung Ambarukmo</span>
                 </div>
-                <div class="hidden md:block">
+                <div class="hidden pistols md:block">
                     <div class="ml-10 flex items-center space-x-8">
                         <a href="#home" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Beranda</a>
                         <a href="#menu" class="nav-link text-primary hover:text-accent px-3 py-2 text-sm font-medium">Menu</a>
@@ -171,7 +172,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative hero-pattern hero-section flex items-center justify-center overflow-hidden">
+ sezione id="home" class="relative hero-pattern hero-section flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-primary/30 to-dark/50 batik-overlay"></div>
         <div class="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center animate-fade-in">
             <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-black mb-6 animate-slide-up">
@@ -461,22 +462,22 @@
             
             <div class="lg:grid lg:grid-cols-2 lg:gap-16">
                 <div class="mb-12 lg:mb-0">
-                    <form class="space-y-6">
+                    <form id="contactForm" class="space-y-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-primary mb-1">Nama Lengkap</label>
-                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="Nama Anda">
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="Nama Anda" required>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-primary mb-1">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="email@contoh.com">
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="email@contoh.com" required>
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-primary mb-1">Nomor Telepon</label>
-                            <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="0812-3456-7890">
+                            <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="0812-3456-7890" required>
                         </div>
                         <div>
                             <label for="message" class="block text-sm font-medium text-primary mb-1">Pesan</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="Tulis pesan Anda di sini..."></textarea>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="saya ingin mereservasi ... meja (jumlah)" required></textarea>
                         </div>
                         <div>
                             <button type="submit" class="w-full bg-primary text-white py-3 px-6 rounded-md hover:bg-accent transition duration-300 font-medium">
@@ -484,6 +485,7 @@
                             </button>
                         </div>
                     </form>
+                    <p class="text-sm text-gray-500 mt-2">Data Anda akan dikirim melalui WhatsApp untuk keperluan reservasi atau komunikasi.</p>
                 </div>
                 
                 <div>
@@ -603,6 +605,25 @@
         
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
+        });
+
+        // Menangkap submit formulir untuk WhatsApp
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            const whatsappMessage = `PESAN DARI WEBSITE: halo, saya ${name} ingin ${message} dengan kontak saya ${email} atau ${phone}. Terimakasih`;
+
+            const whatsappNumber = '6281380464576';
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+            window.open(whatsappURL, '_blank');
+            document.getElementById('contactForm').reset();
+            alert('Pesan Anda telah dikirim ke WhatsApp!');
         });
     </script>
 </body>
